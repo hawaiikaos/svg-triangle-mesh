@@ -1,0 +1,159 @@
+<HTML>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    </head>
+    <body>
+        
+        <!-- <svg height="' + peakY + '" width="100" id="canvas"><polygon points="0,0 50,0 ' + peakX + ',' + peakY + '" style="fill:' + colorA +';stroke:' + colorB +';stroke-width:1" /></svg> -->
+        
+        <svg height="300" width="300" id="triangle-mesh">
+            <polygon id="t1" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t2" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t3" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t4" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t5" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t6" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t7" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t8" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t9" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t10" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t11" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t12" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t13" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t14" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t15" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+            <polygon id="t16" points="0,0 50,0 20,20" style="fill:white;stroke:blue;stroke-width:1" />
+        </svg>
+        
+        <script>
+        var screenWidth = $(document).width();
+        var screenHeight = $(document).height();
+        console.log("screenWidth: ", screenWidth);
+        console.log("screenHeight: ", screenHeight);
+        
+        function stretchToScreen(p) {
+            /* p: point to stretch */
+            var scaleX = 270;
+            var scaleY = 190;
+            
+            var newX = newY = 0;
+            if (p[0] !== 0) {
+                newX = parseInt((p[0] / scaleX) * screenWidth);
+            }
+            if (p[1] !== 0) {
+                newY = parseInt((p[1] / scaleY) * screenHeight);
+            }
+            console.log("newX: ", newX);
+            console.log("newY: ", newY);
+            return [newX, newY];
+            
+        }
+        function pointToText(t) {
+            /* t: the triangle point data to convert to SVG point text */
+            //console.log("t: ", eval(t));
+            var pa = eval(t);
+            //console.log("pa: ", pa);
+            var a = eval(pa[0]);
+            var b = eval(pa[1]);
+            var c = eval(pa[2]);
+            //console.log("a: ", a, "b: ", b, "c: ", c);
+            p = "" + a[0] + "," + a[1] + " " + b[0] + "," + b[1] + " " + c[0] + "," + c[1] + "";
+            //console.log("p: ", p);
+            
+            return p;
+        }
+        var p1 = [0,0];
+        var p2 = [0,30];
+        var p3 = [0,120];
+        var p4 = [30,30];
+        var p5 = [70,0];
+        var p6 = [90,110];
+        var p7 = [130,190];
+        var p8 = [170,90];
+        var p9 = [130,0];
+        var p10 = [170,0];
+        var p11 = [220,110];
+        var p12 = [270,190];
+        var p13 = [270,0];
+        var p14 = [0,190];
+        
+        var tA = ["p1", "p2", "p4"];
+        var tB = ["p1", "p4", "p5"];
+        var tC = ["p2", "p4", "p3"];
+        var tD = ["p4", "p5", "p6"];
+        var tE = ["p3", "p4", "p6"];
+        var tF = ["p5", "p6", "p9"];
+        var tG = ["p3", "p6", "p7"];
+        var tH = ["p6", "p9", "p8"];
+        var tI = ["p6", "p8", "p7"];
+        var tJ = ["p9", "p10", "p8"];
+        var tK = ["p3", "p7", "p14"];
+        var tL = ["p8", "p11", "p7"];
+        var tM = ["p10", "p8", "p11"];
+        var tN = ["p10", "p11", "p13"];
+        var tO = ["p7", "p11", "p12"];
+        var tP = ["p11", "p13", "p12"];
+        
+        var pointMap = [
+            ["t1", "tA"],
+            ["t2", "tB"],
+            ["t3", "tC"],
+            ["t4", "tD"],
+            ["t5", "tE"],
+            ["t6", "tF"],
+            ["t7", "tG"],
+            ["t8", "tH"],
+            ["t9", "tI"],
+            ["t10", "tJ"],
+            ["t11", "tK"],
+            ["t12", "tL"],
+            ["t13", "tM"],
+            ["t14", "tN"],
+            ["t15", "tO"],
+            ["t16", "tP"]
+        ];
+        
+        p1 = stretchToScreen(p1);
+        p2 = stretchToScreen(p2);
+        p3 = stretchToScreen(p3);
+        p4 = stretchToScreen(p4);
+        p5 = stretchToScreen(p5);
+        p6 = stretchToScreen(p6);
+        p7 = stretchToScreen(p7);
+        p8 = stretchToScreen(p8);
+        p9 = stretchToScreen(p9);
+        p10 = stretchToScreen(p10);
+        p11 = stretchToScreen(p11);
+        p12 = stretchToScreen(p12);
+        p13 = stretchToScreen(p13);
+        p14 = stretchToScreen(p14);
+        
+        function setPoints() {
+            for (var i = 0; i < pointMap.length; i++) {
+                var pointText = pointToText(pointMap[i][1]);
+                //console.log("pointText: ", pointText);
+                var triangleElement = $(eval(pointMap[i][0]));
+                $(triangleElement).attr("points", pointText);
+                //console.log("triangleElement: ", triangleElement);
+            }
+        }
+        $("#triangle-mesh").attr("width", screenWidth);
+        $("#triangle-mesh").attr("height", screenHeight);
+        setPoints();
+        
+        counter = 0;
+        counterLimit = 50;
+        var animateInterval = setInterval(function(){
+            if (counter < counterLimit) {
+                p11[0]++;
+                setPoints();
+                counter++;
+            } else {
+                clearInterval(animateInterval);
+            }
+        }, 100);
+        
+        </script>
+    </body>
+</html>
+
